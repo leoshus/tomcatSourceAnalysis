@@ -50,7 +50,6 @@ public class HttpServer extends SocketConstant{
 					request.parse();
 					
 					Response response = new Response(outputStream);
-					response.setRequest(request);
 					String uri = request.getUri();
 					if(uri.startsWith("/servlet/")){
 						ServletProcessor servletProcessor = new ServletProcessor();

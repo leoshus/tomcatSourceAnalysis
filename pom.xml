@@ -25,6 +25,7 @@
   <properties>
   	<junit.version>4.11</junit.version>
   	<servlet.version>2.5</servlet.version>
+  	<tomcat.version>7.0.47</tomcat.version>
   </properties>
   
   <dependencies>
@@ -40,6 +41,27 @@
 		<version>${servlet.version}</version>
 		<scope>provided</scope>
 	</dependency>
+	<!--tomcat 6.x 
+	<dependency>
+		<groupid>org.apache.tomcat</groupid>
+		<artifactid>catalina</artifactid>
+		<version>${tomcat.version}</version>
+		<scope>provided</scope>
+	</dependency> -->
+	
+	<!-- tomcat 7.x -->
+	<dependency>
+		<groupId>org.apache.tomcat</groupId>
+		<artifactId>tomcat-catalina</artifactId>
+		<version>${tomcat.version}</version>
+		<scope>provided</scope>
+	</dependency>
+	<dependency>
+		<groupId>org.apache.tomcat</groupId>
+		<artifactId>tomcat-coyote</artifactId>
+		<version>${tomcat.version}</version>
+		<scope>provided</scope>
+	</dependency> 
   </dependencies>
   <build>
     <finalName>tomcatSourceAnalysis</finalName>

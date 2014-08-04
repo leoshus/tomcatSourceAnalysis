@@ -30,9 +30,7 @@ public class ServletProcessor {
 			URL[] urls = new URL[1];
 			URLStreamHandler urlStreamHandler = null;
 			String tmp = this.getClass().getName();
-			File classPath = new File(System.getProperty("user.dir")+"com\\sdw\\soft\\servlet\\sample");
-//			File classPath = new File(SocketConstant.WEB_ROOT);
-			System.out.println(System.getProperty("user.dir")+File.separator+tmp.substring(0, tmp.lastIndexOf('.')).replace('.', '/'));
+			File classPath = new File(SocketConstant.WEB_ROOT);
 			//the form of repository is taken from the createClassLoader method in 
 			//org.apache.catalina.loader.StandardClassLoader
 			String repository = (new URL("file",null,classPath.getCanonicalPath() + File.separator)).toString();

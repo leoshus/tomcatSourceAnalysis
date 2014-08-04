@@ -25,8 +25,6 @@ import com.sdw.soft.socket.sample.SocketConstant;
 public class Response implements ServletResponse{
 
 	
-	private static final int MAX_SIZE = 1024;
-	private Request request;
 	private OutputStream outputStream;
 	private PrintWriter printWriter = null;
 	
@@ -34,45 +32,8 @@ public class Response implements ServletResponse{
 		this.outputStream = outputStream;
 	}
 	
-	public void sendStaticResource(){
-		FileInputStream fis = null;
-		File file = new File(SocketConstant.WEB_ROOT,request.getUri());
-		byte[] buffer = new byte[MAX_SIZE];
-		try {
-			if(file.exists()){
-				fis = new FileInputStream(file);
-				
-				int len = fis.read(buffer,0,MAX_SIZE);
-				while(len != -1){
-					outputStream.write(buffer, 0, len);
-					len = fis.read(buffer, 0, MAX_SIZE);
-				}
-			}else{
-				String message = "HTTP/1.1 404 Not Found File\r\n"
-						+ "Host:localhost:8099\r\n"
-						+ "Content-Type:text/html\r\n"
-						+ "Content-Length: 23\r\n"
-						+ "\r\n"
-						+ "<h1>File Not Found</h1>";
-				outputStream.write(message.getBytes());
-			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}finally{
-			try {
-				fis.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		
-		
-	}
-	public void setRequest(Request request){
-		this.request = request;
+	public OutputStream getOutput(){
+		return outputStream;
 	}
 	@Override
 	public String getCharacterEncoding() {
