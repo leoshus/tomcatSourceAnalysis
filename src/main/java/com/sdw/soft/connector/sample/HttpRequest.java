@@ -7,6 +7,7 @@ package com.sdw.soft.connector.sample;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.security.Principal;
 import java.util.Enumeration;
@@ -25,7 +26,12 @@ import javax.servlet.http.HttpSession;
  */
 public class HttpRequest implements HttpServletRequest {
 
+	private InputStream inputStream ;
+	private String requestURI;
 	
+	public HttpRequest(InputStream inputStream){
+		this.inputStream = inputStream;
+	}
 	@Override
 	public Object getAttribute(String name) {
 		// TODO Auto-generated method stub
@@ -299,10 +305,36 @@ public class HttpRequest implements HttpServletRequest {
 
 	@Override
 	public String getRequestURI() {
-		// TODO Auto-generated method stub
-		return null;
+		return requestURI;
+	}
+	public void parseURI(){
+		int i = 0;
+		try {
+			StringBuffer sb = new StringBuffer(2048);
+			byte[] buffer = new byte[2048];
+			i = inputStream.read(buffer);
+			
+			for(int n = 0;n < i;n++){
+				sb.append((char)buffer[n]);
+			}
+			System.out.println("--------请求信息-----------");
+			System.out.println(sb.toString());
+			requestURI = parseUri(sb.toString());
+		} catch (IOException e) {
+			e.printStackTrace();
+			i=-1;
+		}
 	}
 
+	private String parseUri(String content){
+		int index_first = content.indexOf(' ');
+		int index_second = content.indexOf(' ', index_first + 1);
+		if(index_second > index_first){
+			return content.substring(index_first + 1, index_second);
+		}
+		
+		return null;
+	}
 	@Override
 	public StringBuffer getRequestURL() {
 		// TODO Auto-generated method stub

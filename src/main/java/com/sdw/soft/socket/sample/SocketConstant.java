@@ -18,6 +18,7 @@ public class SocketConstant {
 
 	public static final String WEB_ROOT = System.getProperty("user.dir") + File.separator + "\\src\\main\\webapp";
 	
+	public static final String Package = "com.sdw.soft.connector.sample";
 	public SocketConstant() {
 		super();
 	}
